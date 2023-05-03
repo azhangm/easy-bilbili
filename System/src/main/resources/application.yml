@@ -16,3 +16,9 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
+logging:
+  level:
+    nuc:
+      zm:
+        system:
+          mapper: trace
