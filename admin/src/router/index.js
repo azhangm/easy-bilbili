@@ -6,9 +6,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '*',
-    name: 'login',
+    name: 'all',
     component: Login
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  }
 
 ]
 
