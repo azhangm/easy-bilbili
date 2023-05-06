@@ -10,7 +10,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 @SpringBootApplication
-@MapperScan("nuc.zm.system.mapper")
 public class SystemApplication {
     private static final Logger LOG = LoggerFactory.getLogger(SystemApplication.class);
     public static void main(String[] args) {

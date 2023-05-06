@@ -1,4 +1,4 @@
-package nuc.zm.server.mapper.pojo;
+package nuc.zm.server.domain;
 
 public class Test {
     private int id;

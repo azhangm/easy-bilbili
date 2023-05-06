@@ -1,6 +1,6 @@
 package nuc.zm.server.mapper;
 
-import nuc.zm.server.mapper.pojo.Test;
+import nuc.zm.server.domain.Test;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
