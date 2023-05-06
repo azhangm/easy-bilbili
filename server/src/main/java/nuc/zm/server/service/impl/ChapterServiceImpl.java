@@ -8,6 +8,8 @@ import nuc.zm.server.dto.ChapterDto;
 import nuc.zm.server.dto.PageDto;
 import nuc.zm.server.mapper.ChapterMapper;
 import nuc.zm.server.service.ChapterService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ import java.util.List;
  */
 @Service
 public class ChapterServiceImpl implements ChapterService {
-
+    private static final Logger LOG = LoggerFactory.getLogger(ChapterServiceImpl.class);
     @Resource
     private ChapterMapper chapterMapper;
 
@@ -44,7 +46,8 @@ public class ChapterServiceImpl implements ChapterService {
             BeanUtils.copyProperties(chapter,chapterDto);
             chapterDtoList.add(chapterDto);
         }
-        System.out.println(chapterDtoList);
+        LOG.info("ChapterDtoList:{}",chapterDtoList);
+//        System.out.println(chapterDtoList);
         pageDto.setList(chapterDtoList);
     }
 }
