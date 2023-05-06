@@ -1,8 +1,11 @@
 package nuc.zm.server.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import nuc.zm.server.domain.Chapter;
 import nuc.zm.server.domain.ChapterExample;
 import nuc.zm.server.dto.ChapterDto;
+import nuc.zm.server.dto.PageDto;
 import nuc.zm.server.mapper.ChapterMapper;
 import nuc.zm.server.service.ChapterService;
 import org.springframework.beans.BeanUtils;
@@ -25,15 +28,23 @@ public class ChapterServiceImpl implements ChapterService {
     private ChapterMapper chapterMapper;
 
     @Override
-    public List<ChapterDto> list() {
+    public void list(PageDto<ChapterDto> pageDto) {
+        // 分页功能关键字 ： limit.
+        // limit 1 相当于 limit 0 1 从第0行开始 查1条
+        // 插页分件语法规则 调用它后 往后遇到的第一个 select语句会进行分页
+        PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         ChapterExample chapterExample = new ChapterExample();
         List<Chapter> chapters = chapterMapper.selectByExample(chapterExample);
+        PageInfo<Chapter> chapterPageInfo = new PageInfo<>(chapters);
+        long total = chapterPageInfo.getTotal();
+        pageDto.setTotal(total);
         List<ChapterDto> chapterDtoList = new ArrayList<>();
         for (Chapter chapter : chapters) {
             ChapterDto chapterDto = new ChapterDto();
             BeanUtils.copyProperties(chapter,chapterDto);
             chapterDtoList.add(chapterDto);
         }
-        return chapterDtoList;
+        System.out.println(chapterDtoList);
+        pageDto.setList(chapterDtoList);
     }
 }
