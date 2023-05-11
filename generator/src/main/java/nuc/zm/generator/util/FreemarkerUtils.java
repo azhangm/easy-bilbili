@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 代码生成器工具类
@@ -43,11 +44,14 @@ public class FreemarkerUtils {
      * @throws IOException       IoException
      * @throws TemplateException 模板异常
      */
-    public static void generator(String fileName) throws IOException, TemplateException {
+    public static void generator(String fileName , Map<String,String> map) throws IOException, TemplateException {
         FileWriter fileWriter = new FileWriter(fileName);
         BufferedWriter writer = new BufferedWriter(fileWriter);
-        template.process(null,writer);
+        // 第一个参数放置模型数据
+        template.process(map,writer);
         writer.flush();
         writer.close();
     }
+
+
 }
