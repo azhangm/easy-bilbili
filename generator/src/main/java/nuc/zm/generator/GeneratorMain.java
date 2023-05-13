@@ -53,7 +53,7 @@ public class GeneratorMain {
     }
 
     /**
-     * 映射数据库类型为java类型
+     * 映射数据库类型为java类型,
      *
      * @param fieldList 字段列表
      * @return {@link Set}<{@link String}>
@@ -61,23 +61,27 @@ public class GeneratorMain {
     private static Set<String> getJavaTypes(List<DbField> fieldList) {
         Set<String> set = new HashSet<>();
         for (DbField dbField : fieldList) {
-            if (dbField.getDbType().equals("VARCHAR") || dbField.getDbType().equals("CHAR") || dbField.getDbType().equals("TEXT")) {
+            if (dbField.getDbType().toUpperCase().contains("VARCHAR") || dbField.getDbType().toUpperCase().contains("CHAR") || dbField.getDbType().toUpperCase().contains("TEXT")) {
                 dbField.setJavaType("String");
                 set.add("String");
             }
-            else if (dbField.getDbType().equals("DATETIME")) {
-                dbField.setDbType("Date");
+            else if (dbField.getDbType().toUpperCase().contains("DATETIME")) {
+                dbField.setJavaType("Date"); // 修复bug
                 set.add("Date");
             }
-            else if (dbField.getDbType().equals("BIGINT")) {
+            else if (dbField.getDbType().toUpperCase().contains("BIGINT")) {
                 dbField.setJavaType("Long");
                 set.add("Long");
             }
-            else if (dbField.getDbType().equals("decimal")) {
+            else if (dbField.getDbType().toUpperCase().contains("DECIMAL")) {
                 dbField.setJavaType("BigDecimal");
                 set.add("BigDecimal");
             }
-            else if (dbField.getDbType().equals("int")) {
+            else if (dbField.getDbType().contains("tinyint")) {
+                dbField.setJavaType("boolean");
+                set.add("boolean");
+            }
+            else if (dbField.getDbType().toUpperCase().contains("INT")) {
                 dbField.setJavaType("Integer");
                 set.add("Integer");
             }
