@@ -44,7 +44,7 @@ public class FreemarkerUtils {
      * @throws IOException       IoException
      * @throws TemplateException 模板异常
      */
-    public static void generator(String fileName , Map<String,String> map) throws IOException, TemplateException {
+    public static void generator(String fileName , Map<String,Object> map) throws IOException, TemplateException {
         FileWriter fileWriter = new FileWriter(fileName);
         BufferedWriter writer = new BufferedWriter(fileWriter);
         // 第一个参数放置模型数据
