@@ -2,6 +2,7 @@ package nuc.zm.business.controller;
 
 import nuc.zm.server.dto.ChapterDto;
 import nuc.zm.server.dto.PageDto;
+import nuc.zm.server.exception.ConditionException;
 import nuc.zm.server.service.ChapterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ public class ChapterController {
     public PageDto<ChapterDto> list(@RequestBody PageDto<ChapterDto> pageDto){
         LOG.info("前: pageDto : {}",pageDto);
         chapterService.list(pageDto);
+        if (true) //骗过编译器测试
+        throw new ConditionException(2,"查询异常");
         LOG.info("后: pageDto : {}",pageDto);
         return pageDto;
     }

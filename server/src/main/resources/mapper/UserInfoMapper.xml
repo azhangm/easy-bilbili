@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="nuc.zm.server.mapper.SectionMapper">
-  <resultMap id="BaseResultMap" type="nuc.zm.server.domain.Section">
+<mapper namespace="nuc.zm.server.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="nuc.zm.server.domain.UserInfo">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="course_id" jdbcType="BIGINT" property="courseId" />
-    <result column="chapter_id" jdbcType="BIGINT" property="chapterId" />
-    <result column="video" jdbcType="VARCHAR" property="video" />
-    <result column="time" jdbcType="BIGINT" property="time" />
-    <result column="charge" jdbcType="BOOLEAN" property="charge" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="uerId" jdbcType="BIGINT" property="uerid" />
+    <result column="nick" jdbcType="VARCHAR" property="nick" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -72,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, course_id, chapter_id, video, `time`, charge, sort, create_time, update_time
+    id, uerId, nick, avatar, sign, gender, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="nuc.zm.server.domain.SectionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="nuc.zm.server.domain.UserInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from section
+    from user_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,52 +89,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from section
+    from user_info
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from section
+    delete from user_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="nuc.zm.server.domain.SectionExample">
-    delete from section
+  <delete id="deleteByExample" parameterType="nuc.zm.server.domain.UserInfoExample">
+    delete from user_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="nuc.zm.server.domain.Section" useGeneratedKeys="true">
-    insert into section (title, course_id, chapter_id, 
-      video, `time`, charge, 
-      sort, create_time, update_time
-      )
-    values (#{title,jdbcType=VARCHAR}, #{courseId,jdbcType=BIGINT}, #{chapterId,jdbcType=BIGINT}, 
-      #{video,jdbcType=VARCHAR}, #{time,jdbcType=BIGINT}, #{charge,jdbcType=BOOLEAN}, 
-      #{sort,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="nuc.zm.server.domain.UserInfo" useGeneratedKeys="true">
+    insert into user_info (uerId, nick, avatar, 
+      sign, gender, create_time, 
+      update_time)
+    values (#{uerid,jdbcType=BIGINT}, #{nick,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{sign,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="nuc.zm.server.domain.Section" useGeneratedKeys="true">
-    insert into section
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="nuc.zm.server.domain.UserInfo" useGeneratedKeys="true">
+    insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="title != null">
-        title,
+      <if test="uerid != null">
+        uerId,
       </if>
-      <if test="courseId != null">
-        course_id,
+      <if test="nick != null">
+        nick,
       </if>
-      <if test="chapterId != null">
-        chapter_id,
+      <if test="avatar != null">
+        avatar,
       </if>
-      <if test="video != null">
-        video,
+      <if test="sign != null">
+        sign,
       </if>
-      <if test="time != null">
-        `time`,
-      </if>
-      <if test="charge != null">
-        charge,
-      </if>
-      <if test="sort != null">
-        sort,
+      <if test="gender != null">
+        gender,
       </if>
       <if test="createTime != null">
         create_time,
@@ -146,26 +136,20 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
+      <if test="uerid != null">
+        #{uerid,jdbcType=BIGINT},
       </if>
-      <if test="courseId != null">
-        #{courseId,jdbcType=BIGINT},
+      <if test="nick != null">
+        #{nick,jdbcType=VARCHAR},
       </if>
-      <if test="chapterId != null">
-        #{chapterId,jdbcType=BIGINT},
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
       </if>
-      <if test="video != null">
-        #{video,jdbcType=VARCHAR},
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
       </if>
-      <if test="time != null">
-        #{time,jdbcType=BIGINT},
-      </if>
-      <if test="charge != null">
-        #{charge,jdbcType=BOOLEAN},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -175,38 +159,32 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="nuc.zm.server.domain.SectionExample" resultType="java.lang.Long">
-    select count(*) from section
+  <select id="countByExample" parameterType="nuc.zm.server.domain.UserInfoExample" resultType="java.lang.Long">
+    select count(*) from user_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update section
+    update user_info
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
+      <if test="record.uerid != null">
+        uerId = #{record.uerid,jdbcType=BIGINT},
       </if>
-      <if test="record.courseId != null">
-        course_id = #{record.courseId,jdbcType=BIGINT},
+      <if test="record.nick != null">
+        nick = #{record.nick,jdbcType=VARCHAR},
       </if>
-      <if test="record.chapterId != null">
-        chapter_id = #{record.chapterId,jdbcType=BIGINT},
+      <if test="record.avatar != null">
+        avatar = #{record.avatar,jdbcType=VARCHAR},
       </if>
-      <if test="record.video != null">
-        video = #{record.video,jdbcType=VARCHAR},
+      <if test="record.sign != null">
+        sign = #{record.sign,jdbcType=VARCHAR},
       </if>
-      <if test="record.time != null">
-        `time` = #{record.time,jdbcType=BIGINT},
-      </if>
-      <if test="record.charge != null">
-        charge = #{record.charge,jdbcType=BOOLEAN},
-      </if>
-      <if test="record.sort != null">
-        sort = #{record.sort,jdbcType=INTEGER},
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -220,44 +198,36 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update section
+    update user_info
     set id = #{record.id,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      course_id = #{record.courseId,jdbcType=BIGINT},
-      chapter_id = #{record.chapterId,jdbcType=BIGINT},
-      video = #{record.video,jdbcType=VARCHAR},
-      `time` = #{record.time,jdbcType=BIGINT},
-      charge = #{record.charge,jdbcType=BOOLEAN},
-      sort = #{record.sort,jdbcType=INTEGER},
+      uerId = #{record.uerid,jdbcType=BIGINT},
+      nick = #{record.nick,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      sign = #{record.sign,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="nuc.zm.server.domain.Section">
-    update section
+  <update id="updateByPrimaryKeySelective" parameterType="nuc.zm.server.domain.UserInfo">
+    update user_info
     <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
+      <if test="uerid != null">
+        uerId = #{uerid,jdbcType=BIGINT},
       </if>
-      <if test="courseId != null">
-        course_id = #{courseId,jdbcType=BIGINT},
+      <if test="nick != null">
+        nick = #{nick,jdbcType=VARCHAR},
       </if>
-      <if test="chapterId != null">
-        chapter_id = #{chapterId,jdbcType=BIGINT},
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
       </if>
-      <if test="video != null">
-        video = #{video,jdbcType=VARCHAR},
+      <if test="sign != null">
+        sign = #{sign,jdbcType=VARCHAR},
       </if>
-      <if test="time != null">
-        `time` = #{time,jdbcType=BIGINT},
-      </if>
-      <if test="charge != null">
-        charge = #{charge,jdbcType=BOOLEAN},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -268,15 +238,13 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="nuc.zm.server.domain.Section">
-    update section
-    set title = #{title,jdbcType=VARCHAR},
-      course_id = #{courseId,jdbcType=BIGINT},
-      chapter_id = #{chapterId,jdbcType=BIGINT},
-      video = #{video,jdbcType=VARCHAR},
-      `time` = #{time,jdbcType=BIGINT},
-      charge = #{charge,jdbcType=BOOLEAN},
-      sort = #{sort,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="nuc.zm.server.domain.UserInfo">
+    update user_info
+    set uerId = #{uerid,jdbcType=BIGINT},
+      nick = #{nick,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
