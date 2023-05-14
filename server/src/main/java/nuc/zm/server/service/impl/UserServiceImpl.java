@@ -19,6 +19,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
 
 @Service
@@ -82,7 +84,7 @@ public class UserServiceImpl implements UserService {
      * @return {@link String}
      */
     @Override
-    public String login(LoginDto loginDto) {
+    public String login(LoginDto loginDto) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String username = loginDto.getUsername();
         if (StringUtils.isNullOrEmpty(username) )
             throw new ConditionException(ExceptionEnum.EMPTY_USERNAME);

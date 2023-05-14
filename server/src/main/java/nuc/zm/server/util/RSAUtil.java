@@ -9,10 +9,18 @@ import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
+import sun.misc.BASE64Decoder;
 
 import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
 import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 /**
  * rsautil
@@ -33,6 +41,30 @@ public class RSAUtil {
 
     public static String decrypt(String text) {
         return rsa.decryptStr(text, KeyType.PrivateKey);
+    }
+
+    /**
+     * 得到公钥
+     *
+     * @return {@link RSAPublicKey}
+     * @throws Exception 异常
+     */
+    public static RSAPublicKey getPublicKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        byte[] decoded = Base64.decode(PUBLIC_KEY);
+        return (RSAPublicKey) KeyFactory.getInstance("RSA")
+                .generatePublic(new X509EncodedKeySpec(decoded));
+    }
+
+    /**
+     * 获得私钥
+     *
+     * @return {@link RSAPrivateKey}
+     * @throws Exception 异常
+     */
+    public static RSAPrivateKey getPrivateKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        byte[] decoded = Base64.decode(PRIVATE_KEY);
+        return (RSAPrivateKey) KeyFactory.getInstance("RSA")
+                .generatePrivate(new PKCS8EncodedKeySpec(decoded));
     }
 
 

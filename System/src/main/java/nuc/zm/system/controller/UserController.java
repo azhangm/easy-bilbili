@@ -11,6 +11,8 @@ package nuc.zm.system.controller;
  import org.springframework.web.bind.annotation.RestController;
 
  import javax.annotation.Resource;
+ import java.security.NoSuchAlgorithmException;
+ import java.security.spec.InvalidKeySpecException;
 
 @RestController
 @RequestMapping("/user")
@@ -27,9 +29,11 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseVo<String> login(@RequestBody LoginDto loginDto){
+    public ResponseVo<String> login(@RequestBody LoginDto loginDto) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String token = userService.login(loginDto);
         return new ResponseVo<>(token);
     }
+
+
 
 }
