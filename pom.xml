@@ -60,7 +60,6 @@
                 <artifactId>hutool-core</artifactId>
                 <version>5.3.8</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 

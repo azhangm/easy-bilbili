@@ -3,6 +3,7 @@ package nuc.zm.server.mapper;
 
 import nuc.zm.server.domain.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
@@ -12,7 +13,9 @@ public interface UserMapper {
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Long id);
+    User selectByPhone(String phone);
+
+    User selectByUserName(String username);
 
     int updateByPrimaryKeySelective(User record);
 
