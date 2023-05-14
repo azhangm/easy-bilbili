@@ -13,9 +13,9 @@ import java.nio.charset.Charset;
  * @date 2023/05/14
  */
 public class AESUtil {
-    private static byte[] key = {-90,-124,-23,-116,-27,-63,-100,48,126,117,91,-72,104,55,-11,-60};
+    private static final byte[] key = {-90,-124,-23,-116,-27,-63,-100,48,126,117,91,-72,104,55,-11,-60};
     // 构建 对称加密对象 参数算法类型、key密钥
-    private static SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES,key);
+    private static final SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES,key);
 
     /**
      * 加密
