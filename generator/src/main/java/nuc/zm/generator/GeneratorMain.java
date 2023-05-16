@@ -31,8 +31,6 @@ public class GeneratorMain {
         System.out.println("输入表名，开头小写");
         System.out.print("请输入: ");
         String domain = sc.next();
-        map.put("Domain",Domain);
-        map.put("domain",domain);
         List<DbField> fieldList = DbUtils.getAllFieldInfo(domain);
         String tableComment = DbUtils.getTableComment(domain);
         System.out.println("执行前" + fieldList);
@@ -41,12 +39,18 @@ public class GeneratorMain {
         map.put("fieldList",fieldList);
         map.put("typeSet",set);
         map.put("tableComment",tableComment);
+        if (Domain.contains("_")) {
+            Domain = DbUtils.connectStr(Domain,true);
+            domain = DbUtils.connectStr(domain,false);
+        }
+        map.put("Domain",Domain);
+        map.put("domain",domain);
         // 接口生成器
-        FreemarkerUtils.initConfig("service.ftl");
-        FreemarkerUtils.generator(toServicePath + Domain +  "Service.java" , map);
-        FreemarkerUtils.initConfig("service_impl.ftl");
-        // 实现类生成器
-        FreemarkerUtils.generator(toServiceImplPath + Domain + "ServiceImpl.java",map);
+//        FreemarkerUtils.initConfig("service.ftl");
+//        FreemarkerUtils.generator(toServicePath + Domain +  "Service.java" , map);
+//        FreemarkerUtils.initConfig("service_impl.ftl");
+//        // 实现类生成器
+//        FreemarkerUtils.generator(toServiceImplPath + Domain + "ServiceImpl.java",map);
 
         FreemarkerUtils.initConfig("dto.ftl");
         FreemarkerUtils.generator(TODTOPATH + Domain + "Dto.java",map);

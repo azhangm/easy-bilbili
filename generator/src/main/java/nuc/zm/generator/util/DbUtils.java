@@ -128,7 +128,7 @@ public class DbUtils {
         }
     }
 
-    private static String connectStr(String fieldName , boolean toUpper) {
+    public static String connectStr(String fieldName , boolean toUpper) {
         StringBuilder sb = new StringBuilder(fieldName.length());
         for (char ch : fieldName.toCharArray()) {
             if (ch == '_') {

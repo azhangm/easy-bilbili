@@ -14,13 +14,13 @@
   <sql id="Base_Column_List">
     id, username, phone, email, `password`, salt, create_time, update_time
   </sql>
-  <select id="selectByPhone" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
     where phone = #{phone,jdbcType=VARCHAR}
   </select>
-  <select id="selectByUserName" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user
@@ -39,16 +39,20 @@
       </if>
     </where>
   </select>
+    <select id="selectById" resultType="nuc.zm.server.domain.User">
+      select * from user
+        where id=#{userId}
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="nuc.zm.server.domain.User" useGeneratedKeys="true">
-    insert into user (username, phone, email, 
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="nuc.zm.server.domain.User" >
+    insert into user (id,username, phone, email,
       `password`, salt, create_time, 
       update_time)
-    values (#{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+    values (#{id},#{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>

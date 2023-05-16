@@ -35,8 +35,8 @@ public class JWTUtil {
         // 为了设置过期时间
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        // 设置过期时间 60s
-        calendar.add(Calendar.SECOND,1);
+        // 设置过期时间 1 周
+        calendar.add(Calendar.DAY_OF_WEEK,1);
 
         return JWT.create().withKeyId(String.valueOf(userId)) // 关联的id 可以理解为给谁法
                            .withIssuer(ISSUER)  // 由谁签发这个令牌
@@ -47,11 +47,11 @@ public class JWTUtil {
 
     /**
      * 验证令牌
-     *
+     * @ 能够返回 userId 支持用户系统的使用
      * @param token 令牌
-     * @return {@link Boolean}
+     * @return {@link Long}
      */
-    public static Boolean verityToken(String token)  {
+    public static Long verityToken(String token)  {
         try {
             Algorithm algorithm = Algorithm.RSA256(RSAUtil.getPublicKey(),RSAUtil.getPrivateKey());
             // 验证者
@@ -60,13 +60,13 @@ public class JWTUtil {
             DecodedJWT verify = verifier.verify(token);
 
             String keyId = verify.getKeyId();
+            return Long.valueOf(keyId);
         }catch (TokenExpiredException e) {
             throw new ConditionException(ExceptionEnum.EXPIRE_TOKEN);
         }
         catch (Exception e) {
             throw new ConditionException(ExceptionEnum.ILLEGAL_TOKEN);
         }
-        return true;
     }
 
 

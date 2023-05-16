@@ -17,7 +17,8 @@ public  enum ExceptionEnum {
     , USED_PHONE(10006, "手机号已存在")
     , REGISTER_FAILED(10007,"注册失败，请稍后重试" )
     , NEED_REGISTER(10008,"请先注册在登陆！" )
-    , ERROR_PASSWORD(10009,"密码错误");
+    , ERROR_PASSWORD(10009,"密码错误")
+    , EMMPTY_PASSWD(10010,"密码不能为空！");
     private Integer  code;
     private String message;
 
