@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
             throw new ConditionException(ExceptionEnum.USED_PHONE);
         String password = user.getPassword();
         if (StringUtils.isNullOrEmpty(password)) {
-            throw new ConditionException(ExceptionEnum.EMMPTY_PASSWD);
+            throw new ConditionException(ExceptionEnum.EMPTY_PASSWD);
         }
         // 时间戳加密
         Date now = new Date();
@@ -130,6 +130,22 @@ public class UserServiceImpl implements UserService {
         LOG.info("userInfo:{}",userInfo);
         LOG.info("user:{}",user);
         return userInfoDto;
+    }
+
+    @Override
+    public void updateUserInfo(Long currentUserId, UserInfoDto userInfo) {
+        Date now = new Date();
+        userInfo.setUpdateTime(now);
+        String nick = userInfo.getNick();
+        if (StringUtils.isNullOrEmpty(nick)) throw new ConditionException(ExceptionEnum.EMPTY_NICK);
+        String gender = userInfo.getGender();
+        if (StringUtils.isNullOrEmpty(gender)) throw new ConditionException(ExceptionEnum.EMPTY_GENDER);
+        UserInfoExample userInfoExample = new UserInfoExample();
+        userInfoExample.createCriteria().andUeridEqualTo(currentUserId);
+        UserInfo userInfo1 = userInfoMapper.selectByExample(userInfoExample).get(0);
+        BeanUtils.copyProperties(userInfo,userInfo1);
+        LOG.info("userInfo{}",userInfo1);
+        userInfoMapper.updateByPrimaryKeySelective(userInfo1);
     }
 
 }

@@ -1,6 +1,7 @@
 package nuc.zm.system.controller;
 
 
+ import nuc.zm.server.domain.UserInfo;
  import nuc.zm.server.dto.LoginDto;
  import nuc.zm.server.dto.UserDto;
  import nuc.zm.server.dto.UserInfoDto;
@@ -9,10 +10,7 @@ package nuc.zm.system.controller;
  import nuc.zm.system.controller.support.UserSupport;
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
- import org.springframework.web.bind.annotation.PostMapping;
- import org.springframework.web.bind.annotation.RequestBody;
- import org.springframework.web.bind.annotation.RequestMapping;
- import org.springframework.web.bind.annotation.RestController;
+ import org.springframework.web.bind.annotation.*;
 
  import javax.annotation.Resource;
  import java.security.NoSuchAlgorithmException;
@@ -51,4 +49,10 @@ public class UserController {
         return ResponseVo.ok(userInfo);
     }
 
+    @PutMapping("/update-user-info")
+    public ResponseVo<String> updateUserInfo(@RequestBody UserInfoDto userInfo){
+        Long currentUserId = userSupport.getCurrentUserId();
+        userService.updateUserInfo(currentUserId,userInfo);
+        return ResponseVo.ok();
+    }
 }

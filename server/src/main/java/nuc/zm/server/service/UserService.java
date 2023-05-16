@@ -14,4 +14,6 @@ public interface UserService {
     String login(LoginDto loginDto) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
     UserInfoDto getUserInfo(Long currentUserId);
+
+    void updateUserInfo(Long currentUserId, UserInfoDto userInfo);
 }

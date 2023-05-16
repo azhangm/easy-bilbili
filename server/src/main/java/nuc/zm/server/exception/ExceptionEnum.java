@@ -18,7 +18,9 @@ public  enum ExceptionEnum {
     , REGISTER_FAILED(10007,"注册失败，请稍后重试" )
     , NEED_REGISTER(10008,"请先注册在登陆！" )
     , ERROR_PASSWORD(10009,"密码错误")
-    , EMMPTY_PASSWD(10010,"密码不能为空！");
+    , EMPTY_PASSWD(10010,"密码不能为空！")
+    , EMPTY_NICK(100011,"昵称不能为空")
+    , EMPTY_GENDER(10012, "请告诉我性别~ 男 女 未知");
     private Integer  code;
     private String message;
 
