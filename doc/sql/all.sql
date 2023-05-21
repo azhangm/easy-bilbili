@@ -50,3 +50,36 @@ create TABLE `user_info`(
     `update_time` DATETIME not null comment '修改时间',
     primary key (`id`)
 )engine = innodb charset = utf8mb4 comment = '用户账号信息';
+
+drop table if exists `auth_role`;
+
+create table `auth_role` (
+    id bigint comment '主键|id',
+    name varchar(255) comment '角色名称',
+    code varchar(255) comment '唯一标识角色名称，如 ROOT : 超级管理员',
+    `create_time` datetime not null comment '创建时间',
+    `update_time` DATETIME not null comment '修改时间',
+    primary key (`id`)
+);
+
+drop table  if exists `auth_role_user`;
+
+create table `auth_role_user`(
+    id bigint comment '主键|id',
+    user_id bigint comment '用户id',
+    role_id bigint comment  '角色id',
+    `create_time` datetime not null comment '创建时间',
+    primary key (`id`)
+);
+
+drop table if exists `auth_element_option`;
+
+create table `auth_element_option`(
+    id bigint comment '主键|id',
+    element_name varchar(255) comment '页面元素名称',
+    element_code varchar(255) comment  '标识名称的code,方便交互唯一标码',
+    opt_type boolean comment 'true 可点击、false 仅可见',
+    `create_time` datetime not null comment '创建时间',
+    `update_time` DATETIME not null comment '修改时间',
+    primary key (`id`)
+)
