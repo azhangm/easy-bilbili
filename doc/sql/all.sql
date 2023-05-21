@@ -82,4 +82,14 @@ create table `auth_element_option`(
     `create_time` datetime not null comment '创建时间',
     `update_time` DATETIME not null comment '修改时间',
     primary key (`id`)
-)
+);
+
+drop table if exists `auth_role_element_option`;
+
+# 角色可以对页面元素进行哪些操作
+create table  `auth_role_element_option`(
+     id bigint comment '主键|id',
+     role_id bigint comment '角色id',
+     element_id bigint comment '元素操作id',
+     primary key (`id`)
+);
