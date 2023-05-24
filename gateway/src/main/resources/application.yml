@@ -19,10 +19,9 @@ spring:
                 - /system/**
               name: Path
           uri: lb://system
-        - id: business
+        - id: file
           predicates:
             - args:
-                - /business/**
+                - /file/**
               name: Path
-          uri: lb://business
-
+          uri: lb://file

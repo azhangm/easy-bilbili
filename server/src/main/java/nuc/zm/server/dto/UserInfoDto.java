@@ -10,10 +10,7 @@ public class UserInfoDto {
      * 昵称
      */
     private String nick;
-     /**
-     * 头像
-     */
-    private String avatar;
+
      /**
      * 签名
      */
@@ -64,12 +61,6 @@ public class UserInfoDto {
     public String getNick() {
         return nick;
     }
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-    public String getAvatar() {
-        return avatar;
-    }
     public void setSign(String sign) {
         this.sign = sign;
     }
@@ -99,7 +90,6 @@ public class UserInfoDto {
     public String toString() {
         return "UserInfoDto{" +
                 " nick='" + nick + '\'' +
-                ", avatar='" + avatar + '\'' +
                 ", sign='" + sign + '\'' +
                 ", gender='" + gender + '\'' +
                 ", createTime=" + createTime +

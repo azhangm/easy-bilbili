@@ -56,9 +56,7 @@ public class JWTUtil {
             Algorithm algorithm = Algorithm.RSA256(RSAUtil.getPublicKey(),RSAUtil.getPrivateKey());
             // 验证者
             JWTVerifier verifier = JWT.require(algorithm).build();
-
             DecodedJWT verify = verifier.verify(token);
-
             String keyId = verify.getKeyId();
             return Long.valueOf(keyId);
         }catch (TokenExpiredException e) {

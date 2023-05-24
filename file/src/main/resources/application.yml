@@ -1,0 +1,7 @@
+server:
+  port: 9004
+  servlet:
+    context-path: /file
+spring:
+  application:
+    name: file

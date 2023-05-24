@@ -20,7 +20,10 @@ public  enum ExceptionEnum {
     , ERROR_PASSWORD(10009,"密码错误")
     , EMPTY_PASSWD(10010,"密码不能为空！")
     , EMPTY_NICK(100011,"昵称不能为空")
-    , EMPTY_GENDER(10012, "请告诉我性别~ 男 女 未知");
+    , EMPTY_GENDER(10012, "请告诉我性别~ 男 女 未知")
+    // 文件相关 2000x
+    , ILLEGAL_File(20001,"非法文件" )
+    , FAILED_UPLOAD(20002,"上传失败" );
     private Integer  code;
     private String message;
 
