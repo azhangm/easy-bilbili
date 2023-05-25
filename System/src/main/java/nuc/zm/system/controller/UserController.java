@@ -1,6 +1,8 @@
 package nuc.zm.system.controller;
 
 
+ import nuc.zm.server.commons.ApiLimited;
+ import nuc.zm.server.commons.LimitedConstant;
  import nuc.zm.server.domain.UserInfo;
  import nuc.zm.server.dto.LoginDto;
  import nuc.zm.server.dto.UserDto;
@@ -44,6 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/ger-user-info")
+    @ApiLimited(userRoleCode = LimitedConstant.USER_LV0)
     public ResponseVo<UserInfoDto> getUserInfo(){
         Long currentUserId = userSupport.getCurrentUserId();
         UserInfoDto userInfo = userService.getUserInfo(currentUserId);
