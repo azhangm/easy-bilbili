@@ -134,9 +134,9 @@
   <select id="getUserElementAuthorities" resultType="java.util.List" resultMap="BaseResultMap" parameterType="java.util.Set">
     select
         areo.*,
-        aeo.element_name elementName,
-        aeo.element_code elementCode,
-        aeo.opt_type optType
+        aeo.element_name ,
+        aeo.element_code ,
+        aeo.opt_type
     from auth_role_element_option areo
         left join auth_element_option aeo
         on areo.element_id = aeo.id
