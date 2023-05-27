@@ -1,4 +1,4 @@
-package nuc.zm.server.commons;
+package nuc.zm.server.commons.annotation;
 
 import org.springframework.stereotype.Component;
 

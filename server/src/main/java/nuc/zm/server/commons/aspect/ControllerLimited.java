@@ -1,12 +1,12 @@
-package nuc.zm.system.aspect;
+package nuc.zm.server.commons.aspect;
 
 
-import nuc.zm.server.commons.ApiLimited;
+import nuc.zm.server.commons.annotation.ApiLimited;
+import nuc.zm.server.commons.support.UserSupport;
 import nuc.zm.server.dto.AuthRoleUserDto;
 import nuc.zm.server.exception.ConditionException;
 import nuc.zm.server.exception.ExceptionEnum;
 import nuc.zm.server.service.UserRoleService;
-import nuc.zm.system.controller.support.UserSupport;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,7 +33,7 @@ public class ControllerLimited {
     @Resource
     private UserRoleService userRoleService;
     // 定义切点
-    @Pointcut("@annotation(nuc.zm.server.commons.ApiLimited)")
+    @Pointcut("@annotation(nuc.zm.server.commons.annotation.ApiLimited)")
     public void check(){}
 
     // 定义通知 进入 API 时，先进行权限验证

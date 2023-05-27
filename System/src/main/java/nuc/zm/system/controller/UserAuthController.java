@@ -1,9 +1,9 @@
 package nuc.zm.system.controller;
 
+import nuc.zm.server.commons.support.UserSupport;
 import nuc.zm.server.dto.UserAuthorities;
 import nuc.zm.server.service.UserAuthService;
 import nuc.zm.server.vo.ResponseVo;
-import nuc.zm.system.controller.support.UserSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

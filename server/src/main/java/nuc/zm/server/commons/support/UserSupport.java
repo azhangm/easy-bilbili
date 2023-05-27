@@ -1,4 +1,4 @@
-package nuc.zm.system.controller.support;
+package nuc.zm.server.commons.support;
 
 import nuc.zm.server.util.JWTUtil;
 import org.springframework.stereotype.Component;
@@ -7,12 +7,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * 用户支持
- * @description ： 支撑 controller 运行的模块
- * @author zm
- * @date 2023/05/16
- */
 @Component
 public class UserSupport {
 

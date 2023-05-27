@@ -12,6 +12,7 @@ import nuc.zm.server.exception.ConditionException;
 import nuc.zm.server.exception.ExceptionEnum;
 import nuc.zm.server.mapper.UserInfoMapper;
 import nuc.zm.server.mapper.UserMapper;
+import nuc.zm.server.service.UserAuthService;
 import nuc.zm.server.service.UserService;
 import nuc.zm.server.util.JWTUtil;
 import nuc.zm.server.util.MD5Util;
@@ -37,6 +38,8 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserInfoMapper userInfoMapper;
 
+    @Resource
+    private UserAuthService userAuthService;
     /**
      * 注册 使用手机号注册
      * 必须包汉 用户名 手机号、
@@ -91,6 +94,8 @@ public class UserServiceImpl implements UserService {
         userInfo.setUpdateTime(now);
         LOG.info("预设信息:{}" , userInfo);
         userInfoMapper.insert(userInfo);
+
+        userAuthService.addDefaultRole(id);
     }
 
 

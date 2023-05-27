@@ -1,6 +1,9 @@
 package nuc.zm.server.service.impl;
 
+import nuc.zm.server.commons.LimitedConstant;
+import nuc.zm.server.domain.auth.AuthRole;
 import nuc.zm.server.domain.auth.AuthRoleElementOption;
+import nuc.zm.server.domain.auth.AuthRoleUser;
 import nuc.zm.server.dto.AuthRoleUserDto;
 import nuc.zm.server.dto.UserAuthorities;
 import nuc.zm.server.service.AuthElementOptionService;
@@ -39,5 +42,14 @@ private static final Logger LOG = LoggerFactory.getLogger(UserAuthServiceImpl.cl
         userAuthorities.setRoleElementOptions(authRoleElementOptions);
         LOG.info("authRoleElementOptions{}",authRoleElementOptions);
         return userAuthorities;
+    }
+
+    @Override
+    public void addDefaultRole(long id) {
+        AuthRoleUser authRoleUser = new AuthRoleUser();
+        AuthRole role = userRoleService.getRoleByCode(LimitedConstant.USER_LV0);
+        authRoleUser.setRoleId(role.getId());
+        authRoleUser.setUserId(id);
+        userRoleService.addUserRole(authRoleUser);
     }
 }
