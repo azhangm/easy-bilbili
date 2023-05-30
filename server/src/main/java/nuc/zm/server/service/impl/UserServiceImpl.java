@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) throw new ConditionException(ExceptionEnum.NEED_REGISTER);
         String password = loginDto.getPassword();
         String salt = user.getSalt();
-        String sign = MD5Util.sign(password, salt, "UTF-8");
+        String sign = user.getPassword();
         boolean verity = MD5Util.verity(password, salt, sign, "UTF-8");
         if (!verity) throw new ConditionException(ExceptionEnum.ERROR_PASSWORD);
         return JWTUtil.generatorToken(user.getId());

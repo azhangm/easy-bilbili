@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import io.minio.credentials.Jwt;
 import nuc.zm.server.exception.ConditionException;
 import nuc.zm.server.exception.ExceptionEnum;
 
